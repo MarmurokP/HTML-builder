@@ -5,7 +5,12 @@ const bundleCSS = (styleFolder) => {
   fs.readdir(styleFolder, (readFolderErr, styleFiles) => {
       if (readFolderErr) {
           console.error(readFolderErr);
-      };    
+      };
+      fs.writeFile('./05-merge-styles/project-dist/bundle.css', '', (writeError) => {
+        if (writeError) {
+            console.error(writeError);
+        }; 
+      });                     
       styleFiles.forEach((file) => {
           if (path.extname(file) === '.css') {
              const readStream = fs.createReadStream(path.normalize(`${styleFolder}/${file}`), 'utf-8');
