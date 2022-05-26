@@ -1,6 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
+fs.rm(path.resolve(__dirname, './files-copy'), {recursive: true, force: true}, (rmErr) => {
+  if (rmErr) {
+    console.error(rmErr);
+  }
+  copyFolder(path.resolve('./04-copy-directory/files'));
+});
+
 const copyFolder = (folder) => {
   fs.stat(folder, (err, folderStat) => {
     if (err) {
@@ -52,4 +59,4 @@ const copyFolder = (folder) => {
     copyFiles(folder, folderToCopy);
   });
 };
-copyFolder(path.resolve('./04-copy-directory/files'));
+// copyFolder(path.resolve('./04-copy-directory/files'));
