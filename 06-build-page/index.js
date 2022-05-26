@@ -16,11 +16,17 @@ const builder = () => {
             });
         });
         bundleCSS(path.resolve(__dirname, './styles'));
-        copyFolder(path.resolve(__dirname, './assets'))
+        copyFolder(path.resolve(__dirname, './assets'));
     });
 };
 
-builder();
+fs.rm(path.resolve(__dirname, './project-dist'), {recursive: true, force: true}, (rmErr) => {
+  if (rmErr) {
+    console.error(rmErr);
+  }
+  builder();
+});
+
 
 const render = () => {
     return new Promise((resolve, reject) => {
